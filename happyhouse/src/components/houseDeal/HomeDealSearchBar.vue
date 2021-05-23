@@ -1,14 +1,15 @@
 <template>
 <div>
-  <b-row class="mt-1 ml-2"> 
-    <b-col align="left">
+  <b-row class="ml-2 mb-3"> 
+    <b-col cols="5">
     <b-button-group>
       <b-button variant="info" value="apart" @click="setType">아파트</b-button>
       <b-button variant="info" value="house" @click="setType">빌라</b-button>
       <b-button variant="info" value="office" @click="setType">오피스텔</b-button>
     </b-button-group>
     </b-col>
-    <b-col algin="right">
+    <b-col cols="3"></b-col>
+    <b-col cols="4">
       <b-button-group>
       <b-button variant="info" value="deal" @click="setPay">매매</b-button>
       <b-button variant="info" value="rent" @click="setPay">전세</b-button>
@@ -16,7 +17,7 @@
     </b-button-group>
     </b-col>
   </b-row>
-    <b-row class="mt-1 mb-1 ml-2">
+    <b-row class="ml-2">
       <b-col cols="4" align="left">
       <b-form-select v-model="sidoCode" @change="setGungu">
         <option selected>도/광역시</option>
