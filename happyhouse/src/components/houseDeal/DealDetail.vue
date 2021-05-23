@@ -1,0 +1,76 @@
+<template>
+<b-container v-if="apt.aptName" class="bv-example-row mt-2 ml-2">
+        <b-row>
+        <b-col
+            ><h3>{{ apt.aptName }}</h3></b-col
+        >
+        </b-row>
+        <b-row class="mb-2 mt-1">
+        <b-col><img src="@/assets/apt.png" alt=""/></b-col>
+        </b-row>
+        <b-row>
+        <b-col>
+            <b-alert show variant="primary">아파트 이름 : {{ apt.aptName }}</b-alert>
+        </b-col>
+        </b-row>
+        <b-row>
+        <b-col>
+            <b-alert show variant="info">법정동 : {{ apt.dong }}</b-alert>
+        </b-col>
+        </b-row>
+        <b-row>
+        <b-col>
+            <b-alert show variant="warning">층수 : {{ apt.floor }}층</b-alert>
+        </b-col>
+        </b-row>
+        <b-row>
+        <b-col>
+            <b-alert show variant="secondary">건축년도 : {{ apt.buildYear }}</b-alert>
+        </b-col>
+        </b-row>
+    <b-row>
+        <b-col>
+            <b-alert show variant="danger"
+            >거래금액 : {{ (apt.dealAmount.replace(',', '') * 10000) | price }}원</b-alert
+            >
+        </b-col>
+    </b-row>
+    <b-button variant="outline-primary" @click="goBack">이전</b-button>
+</b-container>
+<b-container v-else class="bv-example-row mt-3">
+    <b-row>
+    <b-col><b-alert show>거래 정보를 불러오지 못했습니다.</b-alert></b-col>
+    </b-row>
+</b-container>
+</template>
+
+<script>
+import { mapGetters } from 'vuex';
+
+export default {
+    name: 'DealDetail',
+    created(){ 
+        console.log("detail 화면!!");
+    },
+    computed: {
+        ...mapGetters('deal',{
+            apt : 'getApt'
+        }),
+    },
+    methods:{
+        goBack(){
+            this.$router.go(-1);
+        }
+    },
+    filters: {
+        price(value) {
+        if (!value) return value;
+        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        },
+    },
+}
+</script>
+
+<style>
+
+</style>
