@@ -68,11 +68,9 @@
                   </tr>
                   <tr>
                     <td colspan="2" style="height: 50px; text-align: center;">
-                      <button type="submit">로그인</button>
+                      <b-button type="submit" variant="primary">로그인</b-button>
                       &nbsp;&nbsp;
-                      <button type="button" @click="visablelogin = !visablelogin">
-                        회원가입으로 이동
-                      </button>
+                      <b-button variant="outline-info" @click="findPwd">비밀번호 찾기</b-button>
                     </td>
                   </tr>
                 </tbody>
@@ -158,6 +156,9 @@ export default {
             console.log('로그인 실패.');
           });
       } else alert('입력바람');
+    },
+    findPwd() {
+      this.$router.push('/main/findPw');
     },
   },
 };
