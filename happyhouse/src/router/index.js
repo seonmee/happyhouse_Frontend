@@ -2,7 +2,6 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '@/views/Home.vue';
 import About from '@/views/About.vue';
-import Apt from '@/views/Apt.vue';
 import Login from '@/components/Login.vue';
 import Register from '@/components/Register.vue';
 import UserInfo from '@/components/UserInfo.vue';
@@ -16,6 +15,10 @@ import NoticeList from '@/components/notice/NoticeList.vue';
 import NoticeDetail from '@/components/notice/NoticeDetail.vue';
 import NoticeWrite from '@/components/notice/NoticeWrite.vue';
 import NoticeModify from '@/components/notice/NoticeModify.vue';
+import HomePrice from '@/views/HomePrice.vue';
+import DealList from '@/components/houseDeal/DealList.vue';
+import DealDetail from '@/components/houseDeal/DealDetail.vue';
+import RentDetail from '@/components/houseDeal/RentDetail.vue';
 
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
@@ -36,11 +39,6 @@ const routes = [
     path: '/main/',
     name: 'Home',
     component: Home,
-  },
-  {
-    path: '/main/apt',
-    name: 'Apt',
-    component: Apt,
   },
   {
     path: '/main/about',
@@ -115,6 +113,25 @@ const routes = [
     name: 'NoticeModify',
     component: NoticeModify,
     props: true,
+  },
+  {
+    path: '/main/price',
+    name: 'HomePrice',
+    component: HomePrice,
+    children: [
+      {
+        path: '',
+        component: DealList,
+      },
+      {
+        path: 'dealDetail',
+        component: DealDetail,
+      },
+      {
+        path: 'rentDetail',
+        component: RentDetail,
+      },
+    ],
   },
 ];
 

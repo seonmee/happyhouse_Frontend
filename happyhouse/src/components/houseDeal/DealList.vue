@@ -1,8 +1,11 @@
 <template>
-  <b-container v-if="apts && apts.length != 0" class="bv-example-row mt-3">
-    <deal-list-item v-for="(apt, index) in apts" :key="index" :apt="apt" />
+  <b-container v-if="deals && deals.length != 0" class="bv-example-row mt-1">
+    <deal-list-item v-for="(deal, index) in deals" :key="index" :deal="deal" />
   </b-container>
-  <b-container v-else class="bv-example-row mt-3">
+  <b-container v-else-if="rents && rents.length != 0" class="bv-example-row mt-1">
+    <deal-list-item v-for="(rent, index) in rents" :key="index" :rent="rent" />
+  </b-container>
+  <b-container v-else class="bv-example-row mt-1">
     <b-row>
       <b-col><b-alert show>거래 정보가 없습니다.</b-alert></b-col>
     </b-row>
@@ -20,12 +23,13 @@ name: 'DealList',
   },
   computed: {
     ...mapGetters('deal',{
-      apts: 'getAptList'
+      deals: 'getDealList',
+      rents: 'getRentList'
     }),
   },
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

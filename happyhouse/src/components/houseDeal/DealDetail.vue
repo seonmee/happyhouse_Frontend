@@ -1,40 +1,46 @@
 <template>
-<b-container v-if="apt.aptName" class="bv-example-row mt-2 ml-2">
+<b-container v-if="deal.jibun" class="bv-example-row mt-2 ml-2">
         <b-row>
         <b-col
-            ><h3>{{ apt.aptName }}</h3></b-col
+            ><h3>{{ deal.name }}</h3></b-col
         >
         </b-row>
         <b-row class="mb-2 mt-1">
         <b-col><img src="@/assets/apt.png" alt=""/></b-col>
         </b-row>
         <b-row>
+            <b-col>
+                <b-alert show variant="danger"
+                >거래 금액 : {{ (deal.dealAmount.replace(',', '') * 10000) | price }}원</b-alert
+                >
+            </b-col>
+        </b-row>
+
+        <b-row>
         <b-col>
-            <b-alert show variant="primary">아파트 이름 : {{ apt.aptName }}</b-alert>
+            <b-alert show variant="primary">아파트/주택 명 : {{ deal.name }}</b-alert>
+        </b-col>
+            <b-row>
+            <b-col>
+                <b-alert show variant="warning">층수 : {{ deal.floor }}층</b-alert>
+            </b-col>
+            </b-row>
+        </b-row>
+        <b-row>
+        <b-col>
+            <b-alert show variant="info">법정동 : {{ deal.dong }}</b-alert>
         </b-col>
         </b-row>
         <b-row>
         <b-col>
-            <b-alert show variant="info">법정동 : {{ apt.dong }}</b-alert>
+            <b-alert show variant="secondary">건축년도 : {{ deal.buildYear }}</b-alert>
         </b-col>
+            <b-row>
+            <b-col>
+                <b-alert show variant="secondary">거래 일자 : {{ deal.dealYear }}/ {{ deal.dealMonth }}/ {{ deal.dealDay }}</b-alert>
+            </b-col>
+            </b-row>
         </b-row>
-        <b-row>
-        <b-col>
-            <b-alert show variant="warning">층수 : {{ apt.floor }}층</b-alert>
-        </b-col>
-        </b-row>
-        <b-row>
-        <b-col>
-            <b-alert show variant="secondary">건축년도 : {{ apt.buildYear }}</b-alert>
-        </b-col>
-        </b-row>
-    <b-row>
-        <b-col>
-            <b-alert show variant="danger"
-            >거래금액 : {{ (apt.dealAmount.replace(',', '') * 10000) | price }}원</b-alert
-            >
-        </b-col>
-    </b-row>
     <b-button variant="outline-primary" @click="goBack">이전</b-button>
 </b-container>
 <b-container v-else class="bv-example-row mt-3">
@@ -54,7 +60,7 @@ export default {
     },
     computed: {
         ...mapGetters('deal',{
-            apt : 'getApt'
+            deal : 'getDeal'
         }),
     },
     methods:{

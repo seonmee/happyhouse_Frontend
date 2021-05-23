@@ -1,6 +1,6 @@
 <template>
 <div>
-  <b-row class="mt-1 mb-1 ml-2"> 
+  <b-row class="mt-1 ml-2"> 
     <b-col align="left">
     <b-button-group>
       <b-button variant="info" value="apart" @click="setType">아파트</b-button>
@@ -11,8 +11,8 @@
     <b-col algin="right">
       <b-button-group>
       <b-button variant="info" value="deal" @click="setPay">매매</b-button>
-      <b-button variant="info" value="sdeposit" @click="setPay">전세</b-button>
-      <b-button variant="info" value="sdeposit" @click="setPay">월세</b-button>
+      <b-button variant="info" value="rent" @click="setPay">전세</b-button>
+      <b-button variant="info" value="deposit" @click="setPay">월세</b-button>
     </b-button-group>
     </b-col>
   </b-row>
@@ -72,24 +72,47 @@ export default {
     });
   },
   methods: {
-    ...mapActions('deal',['getAptDealList']),
+    ...mapActions('deal',['getAptDealList','getAptRentList','getHomeDealList','getHomeRentList','getOfficeDealList','getOfficeRentList']),
     sendKeyword() {
+      /* 아파트 */
       if (this.sidoCode && this.type == 'apart'&& this.pay == 'deal') { // 매매
-        this.paramList = [this.gunguCode, this.dong];
+        this.paramList = [this.gunguCode, this.dong, 1];
         this.getAptDealList(this.paramList);
       }else if (this.sidoCode && this.type == 'apart'&& this.pay == 'rent') { // 월세 
-        this.paramList = [this.gunguCode, this.dong];
-        this.getAptDealList(this.paramList);
+        this.paramList = [1, this.gunguCode, this.dong, 1];
+        this.getAptRentList(this.paramList);
       }else if (this.sidoCode && this.type == 'apart'&& this.pay == 'deposit') { // 전세
-        this.paramList = [this.gunguCode, this.dong];
-        this.getAptDealList(this.paramList);
+        this.paramList = [2, this.gunguCode, this.dong, 1];
+        this.getAptRentList(this.paramList);
+      }
+      /* 연립 다세대 */
+      else if (this.sidoCode && this.type == 'house'&& this.pay == 'deal') { // 매매
+        this.paramList = [this.gunguCode, this.dong, 1];
+        this.getHomeDealList(this.paramList);
+      }else if (this.sidoCode && this.type == 'house'&& this.pay == 'rent') { // 월세 
+        this.paramList = [1, this.gunguCode, this.dong, 1];
+        this.getHomeRentList(this.paramList);
+      }else if (this.sidoCode && this.type == 'house'&& this.pay == 'deposit') { // 전세
+        this.paramList = [2, this.gunguCode, this.dong, 1];
+        this.getHomeRentList(this.paramList);
+      }
+       /* 오피스텔 */
+      else if (this.sidoCode && this.type == 'office'&& this.pay == 'deal') { // 매매
+        this.paramList = [this.gunguCode, this.dong, 1];
+        this.getOfficeDealList(this.paramList);
+      }else if (this.sidoCode && this.type == 'office'&& this.pay == 'rent') { // 월세 
+        this.paramList = [1, this.gunguCode, this.dong, 1];
+        this.getOfficeRentList(this.paramList);
+      }else if (this.sidoCode && this.type == 'office'&& this.pay == 'deposit') { // 전세
+        this.paramList = [2, this.gunguCode, this.dong, 1];
+        this.getOfficeRentList(this.paramList);
       }
     },
     setType: function(event) {
       var thisBtn = event.currentTarget;
       thisBtn.classList.add('active');
       let sibling  = thisBtn.parentNode.firstChild;
-      // collecting siblings
+
       while (sibling) {
         if (sibling.nodeType === 1 && sibling !== thisBtn) {
           sibling.classList.remove('active');
@@ -102,7 +125,7 @@ export default {
       var thisBtn = event.currentTarget;
       thisBtn.classList.add('active');
       let sibling  = thisBtn.parentNode.firstChild;
-      // collecting siblings
+
       while (sibling) {
         if (sibling.nodeType === 1 && sibling !== thisBtn) {
           sibling.classList.remove('active');

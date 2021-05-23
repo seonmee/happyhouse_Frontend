@@ -1,5 +1,20 @@
 <template>
-    <b-row
+    <b-row v-if="deal && deal.length != 0"
+        class="m-1"
+        @mouseover="colorChange(true)"
+        @mouseout="colorChange(false)"
+        :class="{ 'mouse-over-bgcolor': isColor }"
+    >
+    <b-col cols="2" class="text-center">
+        <img src="@/assets/apt.png" class="img-list" alt="" />
+    </b-col>
+    <b-col cols="10" @click="chooseDeal">
+        <router-link to="/main/price/dealDetail">
+        [{{ this.deal.buildYear}}] {{ this.deal.name }}
+        </router-link>
+        </b-col>
+    </b-row>
+    <b-row v-else-if="rent && rent.length != 0"
         class="m-2"
         @mouseover="colorChange(true)"
         @mouseout="colorChange(false)"
@@ -8,9 +23,9 @@
     <b-col cols="2" class="text-center">
         <img src="@/assets/apt.png" class="img-list" alt="" />
     </b-col>
-    <b-col cols="10" @click="chooseApt">
-        <router-link to="/main/price/detail">
-        [{{ this.apt.buildYear}}] {{ this.apt.aptName }}
+    <b-col cols="10" @click="chooseRent">
+        <router-link to="/main/price/rentDetail">
+        [{{ this.rent.buildYear}}] {{ this.rent.name }}
         </router-link>
         </b-col>
     </b-row>
@@ -26,12 +41,16 @@ export default {
         };
     },
     props: {
-        apt: Object,
+        deal: Object,
+        rent: Object
     },
     methods: {
-        ...mapActions('deal',['selectApt']),
-        chooseApt() {
-            this.selectApt(this.apt);
+        ...mapActions('deal',['selectDeal','selectRent']),
+        chooseDeal() {
+            this.selectDeal(this.deal);
+        },
+        chooseRent() {
+            this.selectRent(this.rent);
         },
         colorChange(flag) {
         this.isColor = flag;
@@ -42,7 +61,7 @@ export default {
 
 <style scoped>
 .img-list {
-  width: 50px;
+  width: 100px;
 }
 .mouse-over-bgcolor {
   background-color: lightblue;

@@ -33,6 +33,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+
 export default {
     data() {
       return {
@@ -42,37 +43,69 @@ export default {
         currCategory:[],
         map:[],
         ps: [],
-        marker:[]
       }
     },
     mounted(){
-     if (window.kakao && window.kakao.maps) {
+    if (window.kakao && window.kakao.maps) {
       this.initMap()
     } else {
       const script = document.createElement('script')
       script.onload = () => kakao.maps.load(this.initMap);
-      script.src = 'http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey='+process.env.VUE_APP_KAKAO_MAP_KEY+'&libraries=services';
+      script.src = 'http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey='+process.env.VUE_APP_KAKAO_MAP_KEY+'&libraries=services,clusterer,drawing';
       document.head.appendChild(script)
     }
     },computed:{
       ...mapGetters('deal',{
-        position : 'getAptPosition'
+        pos: 'getPosition'
       }),
     },
     methods: {
       initMap() {
         this.placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
-        this.contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다 
+        this.contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트
         this.markers = [], // 마커를 담을 배열입니다
         this.currCategory = ''; // 현재 선택된 카테고리를 가지고 있을 변수
-
+        /* 1 */
         var mapContainer = document.getElementById('map'), 
         mapOption = {
-          center: new kakao.maps.LatLng(this.position[0], this.position[1]), // 지도의 중심좌표
+          center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
           level: 3, // 지도의 확대 레벨
         };
-
         this.map = new kakao.maps.Map(mapContainer, mapOption);    // 지도 객체
+        
+        /* 2 */
+        // 주소-좌표 변환 객체
+        var geocoder = new kakao.maps.services.Geocoder();
+
+        console.log("주소 반환 전 " + this.pos);
+
+        // 주소로 좌표를 검색합니다
+        geocoder.addressSearch("서울시 중랑구 면목동", function(result, status) {
+
+        // 정상적으로 검색이 완료됐으면 
+        if (status === kakao.maps.services.Status.OK) {
+              var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+              var self = this;
+              // 결과값으로 받은 위치를 마커로 표시합니다
+              var marker = new kakao.maps.Marker({
+                  map: self.map,
+                  position: coords
+              });
+
+              // 인포윈도우로 장소에 대한 설명을 표시합니다
+              var infowindow = new kakao.maps.InfoWindow({
+                  content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+              });
+              infowindow.open(self.map, marker);
+
+              // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+              self.map.setCenter(coords);
+            } else {
+              console.log("못찾아요 ㅜㅜ");
+            }
+        });    
+
         this.ps = new kakao.maps.services.Places(this.map);        // 장소 검색 객체
 
         kakao.maps.event.addListener(this.map, 'idle', this.searchPlaces);     // idle event 등록
@@ -85,11 +118,6 @@ export default {
         
         this.addCategoryClickEvent();     // 카테고리에 addEvent등록
 
-        const markerPosition = new kakao.maps.LatLng(this.position[0], this.position[1]);
-        this.marker = new kakao.maps.Marker({
-          position: markerPosition
-        });
-        this.marker.setMap(this.map);
       },
       // 엘리먼트에 이벤트 핸들러를 등록하는 함수입니다
       addEventHandle(target, type, callback) {
