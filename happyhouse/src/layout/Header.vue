@@ -23,8 +23,12 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#" class="_nav">공지사항</b-nav-item>
-          <b-nav-item href="#" class="_nav">게시판</b-nav-item>
+          <b-nav-item href="#" class="_nav"
+            ><router-link to="/main/notice/noticeList">공지사항</router-link></b-nav-item
+          >
+          <b-nav-item href="#" class="_nav">
+            <router-link to="/main/board/boardList">게시판</router-link></b-nav-item
+          >
           <b-nav-item href="#" class="_nav">아파트정보</b-nav-item>
           <b-nav-item href="#homePrice" class="_nav"><router-link to="/main/price">주택거래정보</router-link></b-nav-item>
         </b-navbar-nav>
@@ -40,6 +44,21 @@
           <b-nav-item href="#" v-if="this.getProfile != ''"
             ><a href="#" @click.prevent="onClickLogout">로그아웃</a></b-nav-item
           >
+          <b-nav-item
+            href="#"
+            v-if="this.getProfile != '' && this.getProfile.rolename == 'ROLE_USER'"
+            ><router-link to="/main/userinfo">내정보</router-link></b-nav-item
+          >
+          <b-nav-item
+            href="#"
+            v-if="this.getProfile != '' && this.getProfile.rolename == 'ROLE_ADMIN'"
+            ><router-link to="/main/manage/usermanage">유저관리</router-link></b-nav-item
+          >
+          <!-- <b-nav-item
+            href="#"
+            v-if="this.getProfile != '' && this.getProfile.rolename == 'ROLE_USER'"
+            ><a href="#" @click.prevent="myinfo">내정보</a></b-nav-item
+          > -->
           <!-- <b-nav-form>
             <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
             <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
