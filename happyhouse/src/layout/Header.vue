@@ -29,7 +29,6 @@
           <b-nav-item href="#" class="_nav">
             <router-link to="/main/board/boardList">게시판</router-link></b-nav-item
           >
-          <b-nav-item href="#" class="_nav">아파트정보</b-nav-item>
           <b-nav-item href="#homePrice" class="_nav"><router-link to="/main/price">주택거래정보</router-link></b-nav-item>
         </b-navbar-nav>
 
