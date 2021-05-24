@@ -11,7 +11,7 @@
         <b-row>
             <b-col>
                 <b-alert show variant="danger"
-                >거래 금액 : {{ (deal.dealAmount.replace(',', '') * 10000) | price }}원</b-alert
+                >매매가 : {{ (deal.dealAmount.replace(',', '') * 10000) | price }}원</b-alert
                 >
             </b-col>
         </b-row>

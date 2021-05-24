@@ -3,17 +3,17 @@
   <b-row class="ml-2 mb-3"> 
     <b-col cols="5">
     <b-button-group>
-      <b-button variant="info" value="apart" @click="setType">아파트</b-button>
-      <b-button variant="info" value="house" @click="setType">빌라</b-button>
-      <b-button variant="info" value="office" @click="setType">오피스텔</b-button>
+      <b-button variant="info" value="apart" @click="setHouseType">아파트</b-button>
+      <b-button variant="info" value="house" @click="setHouseType">빌라</b-button>
+      <b-button variant="info" value="office" @click="setHouseType">오피스텔</b-button>
     </b-button-group>
     </b-col>
     <b-col cols="3"></b-col>
     <b-col cols="4">
       <b-button-group>
-      <b-button variant="info" value="deal" @click="setPay">매매</b-button>
-      <b-button variant="info" value="deposit" @click="setPay">전세</b-button>
-      <b-button variant="info" value="rent" @click="setPay">월세</b-button>
+      <b-button variant="info" value="deal" @click="setHousePay">매매</b-button>
+      <b-button variant="info" value="deposit" @click="setHousePay">전세</b-button>
+      <b-button variant="info" value="rent" @click="setHousePay">월세</b-button>
     </b-button-group>
     </b-col>
   </b-row>
@@ -31,7 +31,7 @@
       </b-form-select>
       </b-col>
       <b-col cols="3" align="left">
-      <b-form-select v-model="dong" @change="setDong">
+      <b-form-select v-model="dong" @change="setDongData">
           <option selected>동</option>
           <option v-for="(dong, index) in dongList" :key="index" :value="dong.dong">{{dong.dong}}</option>
       </b-form-select>
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import http from '@/http-common';
 
 export default {
@@ -63,6 +63,12 @@ export default {
     };
   },
   created(){
+    this.sidoCode = this.getSidoCode();
+    this.gunguCode = this.getGunguCode();
+    this.dong = this.getDong();
+    this.type = this.getType();
+    this.pay = this.getPay();
+
     http
     .get('/apart/sido')
     .then(({ data }) => {
@@ -71,12 +77,34 @@ export default {
     .catch(() => {
       alert('에러가 발생했습니다.');
     });
+    http
+    .get('/apart/gu/' + this.sidoCode)
+    .then(({ data }) => {
+    this.gunguList = data;
+    console.log(data);
+    })
+    .catch(() => {
+    alert('에러가 발생했습니다.');
+    });
+    http
+    .get('/apart/dong/' + this.gunguCode)
+    .then(({ data }) => {
+    this.dongList = data;
+    })  
+    .catch(() => {
+    alert('에러가 발생했습니다.');
+    });
+
   },
   methods: {
-    ...mapActions('deal',['getSidoCode','getGunguCode','getDongCode'
+    ...mapActions('deal',['setType','setPay'
+    ,'setSidoCode','setGunguCode','setDong'
     ,'getAptDealList','getAptRentList'
     ,'getHomeDealList','getHomeRentList'
     ,'getOfficeDealList','getOfficeRentList']),
+    ...mapGetters(
+      'deal',['getType','getPay','getSidoCode','getGunguCode','getDong']
+    ),
     sendKeyword() {
       /* 아파트 */
       if (this.sidoCode && this.type == 'apart'&& this.pay == 'deal') { // 매매
@@ -112,7 +140,8 @@ export default {
         this.getOfficeRentList(this.paramList);
       }
     },
-    setType: function(event) {
+    setHouseType: function(event) {
+
       var thisBtn = event.currentTarget;
       thisBtn.classList.add('active');
       let sibling  = thisBtn.parentNode.firstChild;
@@ -124,8 +153,11 @@ export default {
         sibling = sibling.nextSibling;
       }
       this.type = event.currentTarget.value;
+      // store에 저장
+      this.setType(this.type);
+
     },
-    setPay: function(event) {
+    setHousePay: function(event) {
       var thisBtn = event.currentTarget;
       thisBtn.classList.add('active');
       let sibling  = thisBtn.parentNode.firstChild;
@@ -137,6 +169,9 @@ export default {
         sibling = sibling.nextSibling;
       }
       this.pay = event.currentTarget.value;
+
+      // store에 저장
+      this.setPay(this.pay);
     },
     setSido(){
       
@@ -144,23 +179,29 @@ export default {
       .get('/apart/gu/' + this.sidoCode)
       .then(({ data }) => {
       this.gunguList = data;
-    })
+      console.log(data);
+      })
       .catch(() => {
       alert('에러가 발생했습니다.');
-    });
+      });
+      // store에 저장
+      this.setSidoCode(this.sidoCode);
     },
     setGungu(){
       http
       .get('/apart/dong/' + this.gunguCode)
       .then(({ data }) => {
       this.dongList = data;
-    })
+      })  
       .catch(() => {
       alert('에러가 발생했습니다.');
-    });
+      });
+      // store에 저장
+      this.setGunguCode(this.gunguCode);
     },
-    setDong(){
-
+    setDongData(){
+      // store에 저장
+      this.setDong(this.dong);
     }
   },
 }

@@ -61,9 +61,9 @@ export default {
 
 <style scoped>
 .img-list {
-  width: 100px;
+    width: 100px;
 }
 .mouse-over-bgcolor {
-  background-color: lightblue;
+    background-color: lightblue;
 }
 </style>

@@ -2,13 +2,15 @@ import http from '@/http-common';
 // initial state
 // shape: [{ id, quantity }]
 const state = () => ({
+  type: '',
+  pay: '',
   sidoCode: '',
   gunguCode: '',
-  dongCode: '',
+  dong: '',
   deals: [],
-  deal: Object,
+  deal: {},
   rents: [],
-  rent: Object,
+  rent: {},
 });
 
 // getters
@@ -25,14 +27,20 @@ const getters = {
   getRent(state) {
     return state.rent;
   },
+  getType(state) {
+    return state.type;
+  },
+  getPay(state) {
+    return state.pay;
+  },
   getSidoCode(state) {
     return state.sidoCode;
   },
   getGunguCode(state) {
     return state.gunguCode;
   },
-  getDongCode(state) {
-    return state.dongCode;
+  getDong(state) {
+    return state.dong;
   },
   getPosition(state) {
     console.log('get ');
@@ -41,9 +49,9 @@ const getters = {
     console.log('deal');
     console.log(state.deal);
     if (state.rent != '') {
-      return state.rent.dong + ' ' + state.rent.jibun;
+      return state.rent;
     } else {
-      return state.deal.dong + ' ' + state.deal.jibun;
+      return state.deal;
     }
   },
 };
@@ -56,6 +64,13 @@ const actions = {
   selectRent({ commit }, rent) {
     commit('SELECT_RENT', rent);
   },
+  /* 타입 설정 */
+  setType({ commit }, type) {
+    commit('SET_TYPE', type);
+  },
+  setPay({ commit }, pay) {
+    commit('SET_PAY', pay);
+  },
   /* 지역 설정 */
   setSidoCode({ commit }, sidoCode) {
     commit('SET_SIDO_CODE', sidoCode);
@@ -63,8 +78,8 @@ const actions = {
   setGunguCode({ commit }, gunguCode) {
     commit('SET_GUNGU_CODE', gunguCode);
   },
-  setDongCode({ commit }, dongCode) {
-    commit('SET_DONG_CODE', dongCode);
+  setDong({ commit }, dong) {
+    commit('SET_DONG', dong);
   },
 
   /* 아파트 */
@@ -168,14 +183,20 @@ const mutations = {
     state.rent = rent;
   },
 
+  SET_TYPE(state, type) {
+    state.type = type;
+  },
+  SET_PAY(state, pay) {
+    state.pay = pay;
+  },
   SET_SIDO_CODE(state, sidoCode) {
     state.sidoCode = sidoCode;
   },
   SET_GUNGU_CODE(state, gunguCode) {
     state.gunguCode = gunguCode;
   },
-  SET_DONG_CODE(state, dongCode) {
-    state.dongCode = dongCode;
+  SET_DONG(state, dong) {
+    state.dong = dong;
   },
 
   GET_APT_DEAL_LIST(state, deals) {
