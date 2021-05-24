@@ -10,9 +10,7 @@
         매매 {{ deal.dealAmount}} 만원
     </b-col>
     <b-col cols="5" class="text-center">
-        <router-link to="/main/price/dealDetail">
         {{ deal.name }} [ {{ deal.floor}} 층 ]
-        </router-link>
     </b-col>
     <b-col cols="3" class="text-center">
         {{ Math.round(this.deal.area/3.3057) }} 평 
@@ -32,9 +30,7 @@
         월세 {{ rent.rentMony }} 만원 / 보증금 {{ rent.deposit }} 만원
     </b-col>
     <b-col cols="5" class="text-center">
-         <router-link to="/main/price/rentDetail">
         {{ rent.name }} [ {{ rent.floor}} 층 ]
-         </router-link>
     </b-col>
     <b-col cols="3" class="text-center">
         {{ Math.round(this.rent.area/3.3057) }} 평 
@@ -59,9 +55,11 @@ export default {
         ...mapActions('deal',['selectDeal','selectRent']),
         chooseDeal() {
             this.selectDeal(this.deal);
+            this.$router.push('/main/price/dealDetail');
         },
         chooseRent() {
             this.selectRent(this.rent);
+            this.$router.push('/main/price/rentDetail');
         },
         colorChange(flag) {
         this.isColor = flag;
