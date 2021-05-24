@@ -12,7 +12,8 @@
     >
   </b-breadcrumb> -->
   <div class="main">
-    <h1>HappyHouse</h1>
+    <img :src="require(`@/assets/title.png`)" id="_img" />
+    <!-- <h1>HappyHouse</h1> -->
     <b-navbar toggleable="lg" type="dark" variant="dark">
       <b-navbar-brand href="#"
         ><b-icon icon="house-fill" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon>
@@ -29,7 +30,9 @@
           <b-nav-item href="#" class="_nav">
             <router-link to="/main/board/boardList">게시판</router-link></b-nav-item
           >
-          <b-nav-item href="#homePrice" class="_nav"><router-link to="/main/price">주택거래정보</router-link></b-nav-item>
+          <b-nav-item href="#homePrice" class="_nav"
+            ><router-link to="/main/price">주택거래정보</router-link></b-nav-item
+          >
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -100,7 +103,7 @@ export default {
 };
 </script>
 
-<style>
+<style scope>
 .main {
   margin-top: 30px;
 }

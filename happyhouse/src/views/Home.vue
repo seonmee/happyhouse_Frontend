@@ -1,12 +1,11 @@
 <template>
-  <b-container class="bv-example-row">
-    <b-row>
-      <b-col>
-        <img alt="Happy House" src="@/assets/happyhouse.png" />
-      </b-col>
-    </b-row>
+  <!-- <b-container class="bv-example-row">
+    <h3>asdfdasfa</h3>
     <Main />
-  </b-container>
+  </b-container> -->
+  <div>
+    <Main />
+  </div>
 </template>
 
 <script>
