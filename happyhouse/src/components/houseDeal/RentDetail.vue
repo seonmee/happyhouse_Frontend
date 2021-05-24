@@ -1,12 +1,7 @@
 <template>
 <b-container v-if="rent.jibun" class="bv-example-row mt-2 ml-2">
         <b-row>
-        <b-col
-            ><h3>{{ rent.name }}</h3></b-col
-        >
-        </b-row>
-        <b-row class="mb-2 mt-1">
-        <b-col><img src="@/assets/apt.png" alt=""/></b-col>
+        <b-col><h3>{{ rent.name }}</h3></b-col>
         </b-row>
         <b-row v-if="rent.rentMoney != 0">
         <b-col>
@@ -23,8 +18,7 @@
         <b-row v-else>
         <b-col>
             <b-alert show variant="danger"
-            >전세(보증금) : {{ (rent.deposit.replace(',', '') * 10000) | price }}원</b-alert
-            >
+            >전세(보증금) : {{ (rent.deposit.replace(',', '') * 10000) | price }}원</b-alert>
         </b-col>
         </b-row>
         <b-row>
@@ -36,6 +30,11 @@
                 <b-alert show variant="warning">층수 : {{ rent.floor }}층</b-alert>
             </b-col>
             </b-row>
+        </b-row>
+         <b-row>
+            <b-col>
+                <b-alert show variant="warning">전용 면적 / 평 : {{ rent.area }} ㎡ /  {{ Math.round(this.rent.area/3.3057) }} 평 </b-alert>
+            </b-col>
         </b-row>
         <b-row>
         <b-col>

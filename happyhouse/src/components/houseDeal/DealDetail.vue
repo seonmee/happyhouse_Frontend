@@ -5,9 +5,6 @@
             ><h3>{{ deal.name }}</h3></b-col
         >
         </b-row>
-        <b-row class="mb-2 mt-1">
-        <b-col><img src="@/assets/apt.png" alt=""/></b-col>
-        </b-row>
         <b-row>
             <b-col>
                 <b-alert show variant="danger"
@@ -25,6 +22,11 @@
                 <b-alert show variant="warning">층수 : {{ deal.floor }}층</b-alert>
             </b-col>
             </b-row>
+        </b-row>
+        <b-row>
+            <b-col>
+                <b-alert show variant="warning">전용 면적 / 평 : {{ deal.area }} ㎡ /  {{ Math.round(this.deal.area/3.3057) }} 평 </b-alert>
+            </b-col>
         </b-row>
         <b-row>
         <b-col>

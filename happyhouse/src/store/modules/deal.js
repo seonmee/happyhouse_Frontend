@@ -43,11 +43,6 @@ const getters = {
     return state.dong;
   },
   getPosition(state) {
-    console.log('get ');
-    console.log('rent');
-    console.log(state.rent);
-    console.log('deal');
-    console.log(state.deal);
     if (state.rent != '') {
       return state.rent;
     } else {
@@ -201,27 +196,27 @@ const mutations = {
 
   GET_APT_DEAL_LIST(state, deals) {
     state.deals = deals;
-    state.rent = '';
+    state.rent = [];
   },
   GET_APT_RENT_LIST(state, rents) {
     state.rents = rents;
-    state.deals = '';
+    state.deals = [];
   },
   GET_HOME_DEAL_LIST(state, deals) {
     state.deals = deals;
-    state.rent = '';
+    state.rent = [];
   },
   GET_HOME_RENT_LIST(state, rents) {
     state.rents = rents;
-    state.deals = '';
+    state.deals = [];
   },
   GET_OFFICE_DEAL_LIST(state, deals) {
     state.deals = deals;
-    state.rent = '';
+    state.rent = [];
   },
   GET_OFFICE_RENT_LIST(state, rents) {
     state.rents = rents;
-    state.deals = '';
+    state.deals = [];
   },
 };
 
