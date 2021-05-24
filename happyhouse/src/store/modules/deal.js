@@ -2,6 +2,9 @@ import http from '@/http-common';
 // initial state
 // shape: [{ id, quantity }]
 const state = () => ({
+  sidoCode: '',
+  gunguCode: '',
+  dongCode: '',
   deals: [],
   deal: Object,
   rents: [],
@@ -22,11 +25,25 @@ const getters = {
   getRent(state) {
     return state.rent;
   },
+  getSidoCode(state) {
+    return state.sidoCode;
+  },
+  getGunguCode(state) {
+    return state.gunguCode;
+  },
+  getDongCode(state) {
+    return state.dongCode;
+  },
   getPosition(state) {
+    console.log('get ');
+    console.log('rent');
+    console.log(state.rent);
+    console.log('deal');
+    console.log(state.deal);
     if (state.rent != '') {
-      return state.rent.name;
+      return state.rent.dong + ' ' + state.rent.jibun;
     } else {
-      return state.deal.name;
+      return state.deal.dong + ' ' + state.deal.jibun;
     }
   },
 };
@@ -39,6 +56,17 @@ const actions = {
   selectRent({ commit }, rent) {
     commit('SELECT_RENT', rent);
   },
+  /* 지역 설정 */
+  setSidoCode({ commit }, sidoCode) {
+    commit('SET_SIDO_CODE', sidoCode);
+  },
+  setGunguCode({ commit }, gunguCode) {
+    commit('SET_GUNGU_CODE', gunguCode);
+  },
+  setDongCode({ commit }, dongCode) {
+    commit('SET_DONG_CODE', dongCode);
+  },
+
   /* 아파트 */
   getAptDealList({ commit }, paramList) {
     http
@@ -134,13 +162,22 @@ const actions = {
 // mutations
 const mutations = {
   SELECT_DEAL(state, deal) {
-    console.log(deal);
     state.deal = deal;
   },
   SELECT_RENT(state, rent) {
-    console.log(rent);
     state.rent = rent;
   },
+
+  SET_SIDO_CODE(state, sidoCode) {
+    state.sidoCode = sidoCode;
+  },
+  SET_GUNGU_CODE(state, gunguCode) {
+    state.gunguCode = gunguCode;
+  },
+  SET_DONG_CODE(state, dongCode) {
+    state.dongCode = dongCode;
+  },
+
   GET_APT_DEAL_LIST(state, deals) {
     state.deals = deals;
     state.rent = '';

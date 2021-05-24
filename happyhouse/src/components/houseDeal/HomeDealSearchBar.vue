@@ -12,27 +12,27 @@
     <b-col cols="4">
       <b-button-group>
       <b-button variant="info" value="deal" @click="setPay">매매</b-button>
-      <b-button variant="info" value="rent" @click="setPay">전세</b-button>
-      <b-button variant="info" value="deposit" @click="setPay">월세</b-button>
+      <b-button variant="info" value="deposit" @click="setPay">전세</b-button>
+      <b-button variant="info" value="rent" @click="setPay">월세</b-button>
     </b-button-group>
     </b-col>
   </b-row>
     <b-row class="ml-2">
       <b-col cols="4" align="left">
-      <b-form-select v-model="sidoCode" @change="setGungu">
+      <b-form-select v-model="sidoCode" @change="setSido">
         <option selected>도/광역시</option>
         <option v-for="(sido, index) in sidoList" :key="index" :value="sido.cityCode">{{sido.city}}</option>
       </b-form-select>
       </b-col>
       <b-col cols="3" align="left">
-      <b-form-select v-model="gunguCode" @change="setDong">
-          <option value="title">군</option>
+      <b-form-select v-model="gunguCode" @change="setGungu">
+          <option selected>군/구</option>
           <option v-for="(gungu, index) in gunguList" :key="index" :value="gungu.guCode">{{gungu.gu}}</option>
       </b-form-select>
       </b-col>
       <b-col cols="3" align="left">
-      <b-form-select v-model="dong">
-          <option value="title">동</option>
+      <b-form-select v-model="dong" @change="setDong">
+          <option selected>동</option>
           <option v-for="(dong, index) in dongList" :key="index" :value="dong.dong">{{dong.dong}}</option>
       </b-form-select>
     </b-col>
@@ -73,7 +73,10 @@ export default {
     });
   },
   methods: {
-    ...mapActions('deal',['getAptDealList','getAptRentList','getHomeDealList','getHomeRentList','getOfficeDealList','getOfficeRentList']),
+    ...mapActions('deal',['getSidoCode','getGunguCode','getDongCode'
+    ,'getAptDealList','getAptRentList'
+    ,'getHomeDealList','getHomeRentList'
+    ,'getOfficeDealList','getOfficeRentList']),
     sendKeyword() {
       /* 아파트 */
       if (this.sidoCode && this.type == 'apart'&& this.pay == 'deal') { // 매매
@@ -135,8 +138,8 @@ export default {
       }
       this.pay = event.currentTarget.value;
     },
-    setGungu(){
-      console.log(this.sidoCode);
+    setSido(){
+      
       http
       .get('/apart/gu/' + this.sidoCode)
       .then(({ data }) => {
@@ -146,7 +149,7 @@ export default {
       alert('에러가 발생했습니다.');
     });
     },
-    setDong(){
+    setGungu(){
       http
       .get('/apart/dong/' + this.gunguCode)
       .then(({ data }) => {
@@ -155,6 +158,9 @@ export default {
       .catch(() => {
       alert('에러가 발생했습니다.');
     });
+    },
+    setDong(){
+
     }
   },
 }

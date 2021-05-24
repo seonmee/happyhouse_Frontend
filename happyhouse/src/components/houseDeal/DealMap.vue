@@ -42,7 +42,7 @@ export default {
         markers:[],
         currCategory:[],
         map:[],
-        ps: [],
+        ps:[],
       }
     },
     mounted(){
@@ -58,6 +58,39 @@ export default {
       ...mapGetters('deal',{
         pos: 'getPosition'
       }),
+    }, watch: {
+    pos: function (val) {
+       /* 2 */
+        // 주소-좌표 변환 객체
+        var geocoder = new kakao.maps.services.Geocoder();
+      
+        const self = this;
+        // 주소로 좌표를 검색합니다
+        geocoder.addressSearch(val, function(result, status) {
+        // 정상적으로 검색이 완료됐으면 
+        if (status === kakao.maps.services.Status.OK) {
+              var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+              console.log(coords);
+              // 결과값으로 받은 위치를 마커로 표시합니다
+              var marker = new kakao.maps.Marker({
+                  map: self.map,
+                  position: coords
+              });
+
+              // 인포윈도우로 장소에 대한 설명을 표시합니다
+              var infowindow = new kakao.maps.InfoWindow({
+                  content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+              });
+              infowindow.open(self.map, marker);
+
+              // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+              self.map.setCenter(coords);
+            } else {
+              console.log("못찾아요 ㅜㅜ");
+            }
+        });    
+    },
     },
     methods: {
       initMap() {
@@ -76,17 +109,15 @@ export default {
         /* 2 */
         // 주소-좌표 변환 객체
         var geocoder = new kakao.maps.services.Geocoder();
-
-        console.log("주소 반환 전 " + this.pos);
-
+      
+        const self = this;
         // 주소로 좌표를 검색합니다
-        geocoder.addressSearch("서울시 중랑구 면목동", function(result, status) {
-
+        geocoder.addressSearch(this.pos, function(result, status) {
         // 정상적으로 검색이 완료됐으면 
         if (status === kakao.maps.services.Status.OK) {
               var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-              var self = this;
+              console.log(coords);
               // 결과값으로 받은 위치를 마커로 표시합니다
               var marker = new kakao.maps.Marker({
                   map: self.map,
