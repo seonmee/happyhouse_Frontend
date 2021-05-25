@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="_backgroundImage">
-      <b-container class="bv-example-row">
+      <b-container id ="searchBox" class="bv-example-row">
         <b-row class="_mainSearch">
           <b-col>
             <search-bar />
@@ -169,7 +169,13 @@ export default {
 
 <style scope>
 #_backgroundImage {
-  background: url('../assets/apartbanner.jpg') no-repeat;
-  background-size: auto;
+  background: url('../assets/main_background.png') no-repeat; 
+  background-size: cover;
+  height: 500px;
+}
+#searchBox{
+  width: 60%;
+  position: relative;
+  top: 40%;
 }
 </style>

@@ -1,12 +1,12 @@
 <template>
-  <div>
-  <b-container v-if="deals && deals.length != 0" class="bv-example-row mt-1">
+  <div class="ml-3">
+  <b-list-group v-if="deals && deals.length != 0" class="mt-1 padding-top">
     <deal-list-item v-for="(deal, index) in deals" :key="index" :deal="deal" />
-  </b-container>
-  <b-container v-else-if="rents && rents.length != 0" class="bv-example-row mt-1">
+  </b-list-group>
+  <b-list-group v-else-if="rents && rents.length != 0" class="mt-1 padding-top">
     <deal-list-item v-for="(rent, index) in rents" :key="index" :rent="rent" />
-  </b-container>
-  <b-container v-else class="bv-example-row mt-1">
+  </b-list-group>
+  <b-container v-else class="mt-1 padding-top">
     <b-row>
       <b-col><b-alert show>거래 정보가 없습니다.</b-alert></b-col>
     </b-row>

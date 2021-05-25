@@ -1,47 +1,36 @@
 <template>
-  <!-- <b-breadcrumb>
-    <b-breadcrumb-item href="#home">
-      <b-icon icon="house-fill" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon>
-      <router-link to="/vuetest/"> HappyHouse</router-link>
-    </b-breadcrumb-item>
-    <b-breadcrumb-item href="/vuetest/apt"
-      ><router-link to="/vuetest/apt">아파트정보</router-link></b-breadcrumb-item
-    >
-    <b-breadcrumb-item href="#about"
-      ><router-link to="/vuetest/about">About</router-link></b-breadcrumb-item
-    >
-  </b-breadcrumb> -->
+
   <div class="main">
-    <img :src="require(`@/assets/title.png`)" id="_img" />
+    <!-- <img :src="require(`@/assets/title.png`)" id="_img" /> -->
     <!-- <h1>HappyHouse</h1> -->
-    <b-navbar toggleable="lg" type="dark" variant="dark">
-      <b-navbar-brand href="#"
+    <b-navbar toggleable="lg" type="light" variant="warning">
+      <b-navbar-brand href="#" @click="moveToMain" class="_nav"
         ><b-icon icon="house-fill" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon>
-        <router-link to="/main/" class="_nav"> HOME </router-link></b-navbar-brand
+      HOME </b-navbar-brand
       >
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#" class="_nav"
-            ><router-link to="/main/notice/noticeList">공지사항</router-link></b-nav-item
+          <b-nav-item href="#" class="_nav" @click="moveToNotice"
+            >공지사항</b-nav-item
           >
-          <b-nav-item href="#" class="_nav">
-            <router-link to="/main/board/boardList">게시판</router-link></b-nav-item
+          <b-nav-item href="#" class="_nav" @click="moveToBoard">
+            게시판</b-nav-item
           >
-          <b-nav-item href="#homePrice" class="_nav"
-            ><router-link to="/main/price">주택거래정보</router-link></b-nav-item
+          <b-nav-item href="#homePrice" class="_nav" @click="moveToDeal"
+            >주택거래정보</b-nav-item
           >
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-item href="#" v-if="this.getProfile == ''"
-            ><router-link to="/main/login">로그인</router-link></b-nav-item
+          <b-nav-item href="#" v-if="this.getProfile == ''" @click="moveToLogin"
+            >로그인</b-nav-item
           >
-          <b-nav-item href="#" v-if="this.getProfile == ''"
-            ><router-link to="/main/register">회원가입</router-link></b-nav-item
+          <b-nav-item href="#" v-if="this.getProfile == ''" @click="moveToReg"
+            >회원가입</b-nav-item
           >
           <b-nav-item href="#" v-if="this.getProfile != ''"
             ><a href="#" @click.prevent="onClickLogout">로그아웃</a></b-nav-item
@@ -99,15 +88,34 @@ export default {
       this.logout();
       this.$router.push('/');
     },
+    moveToMain(){
+      this.$router.push('/main/');
+    },
+    moveToNotice(){
+      this.$router.push('/main/notice/noticeList');
+    },
+    moveToBoard(){
+      this.$router.push('/main/board/boardList');
+    },
+    moveToDeal(){
+      this.$router.push('/main/price');
+    },
+    moveToLogin(){
+      this.$router.push('/main/login');
+    },
+    moveToReg(){
+      this.$router.push('/main/register');
+    }
   },
 };
 </script>
 
 <style scope>
 .main {
-  margin-top: 30px;
+  /* margin-top: 30px; */
+  font-weight: bold;
 }
 ._nav {
-  margin-right: 60px;
+  margin-right: 20px;
 }
 </style>

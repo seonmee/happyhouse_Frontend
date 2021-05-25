@@ -1,19 +1,19 @@
 <template>
-<div>
+<div id = "search_container">
   <b-row class="ml-2 mb-3"> 
-    <b-col cols="5">
+    <b-col cols="5"  align="left">
     <b-button-group>
-      <b-button variant="info" value="apart" @click="setHouseType">아파트</b-button>
-      <b-button variant="info" value="house" @click="setHouseType">빌라</b-button>
-      <b-button variant="info" value="office" @click="setHouseType">오피스텔</b-button>
+      <b-button variant="warning" value="apart" @click="setHouseType">아파트</b-button>
+      <b-button variant="warning" value="house" @click="setHouseType">빌라</b-button>
+      <b-button variant="warning" value="office" @click="setHouseType">오피스텔</b-button>
     </b-button-group>
     </b-col>
     <b-col cols="3"></b-col>
     <b-col cols="4">
       <b-button-group>
-      <b-button variant="info" value="deal" @click="setHousePay">매매</b-button>
-      <b-button variant="info" value="deposit" @click="setHousePay">전세</b-button>
-      <b-button variant="info" value="rent" @click="setHousePay">월세</b-button>
+      <b-button variant="warning" value="deal" @click="setHousePay">매매</b-button>
+      <b-button variant="warning" value="deposit" @click="setHousePay">전세</b-button>
+      <b-button variant="warning" value="rent" @click="setHousePay">월세</b-button>
     </b-button-group>
     </b-col>
   </b-row>
@@ -37,7 +37,7 @@
       </b-form-select>
     </b-col>
     <b-col cols="2" align="left">
-      <b-button variant="outline-primary" @click="sendKeyword">검색</b-button>
+      <b-button variant="outline-warning" @click="sendKeyword">검색</b-button>
     </b-col>
   </b-row>
 </div>
@@ -210,5 +210,7 @@ export default {
 </script>
 
 <style>
-
+  #search_container{
+    font-weight: bold;
+  }
 </style>

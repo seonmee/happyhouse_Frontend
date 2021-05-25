@@ -1,5 +1,5 @@
 <template>
-<b-container v-if="rent.jibun" class="bv-example-row mt-2 ml-2">
+<b-container v-if="rent.jibun" class="bv-example-row mt-2 ml-2 padding-top">
         <b-row>
         <b-col><h3>{{ rent.name }}</h3></b-col>
         </b-row>
@@ -51,7 +51,7 @@
             </b-col>
             </b-row>
         </b-row>
-    <b-button variant="outline-primary" @click="goBack">이전</b-button>
+    <b-button variant="outline-warning" @click="goBack">이전</b-button>
 </b-container>
 <b-container v-else class="bv-example-row mt-3">
     <b-row>
