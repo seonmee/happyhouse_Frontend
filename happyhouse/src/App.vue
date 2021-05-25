@@ -34,6 +34,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  min-height: 100%;
+  padding-bottom: 250px;
+  position: relative;
 }
 
 #nav {

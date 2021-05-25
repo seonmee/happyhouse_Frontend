@@ -82,7 +82,7 @@
     </div>
   </div>
 </template>
-<style>
+<style scope>
 #login_wrap {
   margin: auto;
 }
@@ -90,10 +90,12 @@
   font-weight: bold;
 }
 #main_wrap {
+  margin-top: 52px;
   width: 800px;
   margin-left: auto;
   margin-right: auto;
   padding: 0px;
+  min-height: 610px;
 }
 
 .login_title_warp {

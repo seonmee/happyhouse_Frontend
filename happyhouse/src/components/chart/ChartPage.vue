@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="_str">
     <div class="container">
       <b-row class="ml-2">
         <b-col cols="4" align="left">
@@ -117,7 +117,7 @@ export default {
         labels: this.storelabel,
         datasets: [
           {
-            label: '상업시설 개수',
+            label: '상업시설 개수 (TOP10이내)',
             backgroundColor: '#f87979',
             // Data for the x-axis of the chart
             data: this.storedata,
@@ -151,4 +151,8 @@ export default {
 };
 </script>
 
-<style scope></style>
+<style scope>
+._str {
+  min-height: 660px;
+}
+</style>

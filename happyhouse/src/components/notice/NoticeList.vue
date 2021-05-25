@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="_notice">
     <h1>공지사항</h1>
     <!-- <div class="search_box  form-group row">
       <select class="form-control col-sm-1" v-model="searchType">
@@ -198,12 +198,16 @@ export default {
 };
 </script>
 
-<style>
+<style scope>
 ._writebtn {
   margin-right: 20px;
   float: right;
 }
 .search {
   padding-left: 80%;
+}
+._notice {
+  margin-top: 50px;
+  min-height: 610px;
 }
 </style>

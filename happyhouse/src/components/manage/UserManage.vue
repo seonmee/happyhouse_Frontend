@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="_usermanage">
     <h1>유저 관리</h1>
     <!-- <div class="search_box  form-group row">
       <select class="form-control col-sm-1" v-model="searchType">
@@ -222,5 +222,9 @@ export default {
 }
 .search {
   padding-left: 80%;
+}
+._usermanage {
+  margin-top: 50px;
+  min-height: 610px;
 }
 </style>

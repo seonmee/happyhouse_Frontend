@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container _wr">
     <b-card>
       <h2>게시글 작성</h2>
       <div class="form-group">
@@ -84,8 +84,11 @@ export default {
 };
 </script>
 
-<style>
+<style scope>
 .container {
   padding: 100px;
+}
+._wr {
+  min-height: 650px;
 }
 </style>

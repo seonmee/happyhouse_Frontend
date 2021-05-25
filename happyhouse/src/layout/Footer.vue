@@ -30,13 +30,9 @@ export default {
 };
 </script>
 
-<style>
-body {
-  height: 100%;
-}
-
+<style scope>
 #container {
-  bottom: -500px;
+  bottom: 0;
   position: absolute;
   padding-top: 20px;
   margin-top: 20px;

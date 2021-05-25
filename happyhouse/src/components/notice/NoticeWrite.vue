@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container _nwr">
     <b-card>
       <h2>공지글 작성</h2>
       <div class="form-group">
@@ -87,5 +87,8 @@ export default {
 <style>
 .container {
   padding: 100px;
+}
+._nwr {
+  min-height: 650px;
 }
 </style>
