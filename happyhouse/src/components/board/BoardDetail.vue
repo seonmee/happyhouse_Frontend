@@ -40,14 +40,19 @@
       >
       <b-button type="button" variant="info" @click="moveList">목록</b-button>
     </b-card>
+    <comments :bid="bid"/>
   </b-container>
 </template>
 
 <script>
 import http from '@/http-common';
+import comments from '@/components/comment/comment.vue'
 import { mapGetters } from 'vuex';
 export default {
   name: 'BoardDetail',
+  components:{
+      comments
+  },
   props: ['bid'],
   data() {
     return {
