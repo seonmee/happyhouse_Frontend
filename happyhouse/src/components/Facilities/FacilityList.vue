@@ -7,16 +7,15 @@
         </b-card>
         
         <b-list-group v-if="items && items.length != 0" class="mt-1 padding-top">
-            <facility-list-item v-for="(item, index) in items" :key="index" :item="item"/>
+            <facility-list-item v-for="(item, index) in this.paginatedItems" :key="index" :item="item"/>
         </b-list-group>
-        <!-- <b-pagination
+        <b-pagination
             v-model="currentPage"
-            :total-rows="totalPage"
+            :total-rows="getTotPage"
             :per-page="perPage"
             align="center"
-            @page-click="pageClick"
-            aria-controls="item-list"
-        ></b-pagination> -->
+            @change="onPageChanged"
+        ></b-pagination>
     </div>
 </template>
 
@@ -25,31 +24,44 @@ import { mapGetters } from 'vuex';
 import FacilityListItem from '@/components/Facilities/FacilityListItem.vue';
 
 export default {
-  components: { FacilityListItem },
+components: { FacilityListItem },
     name: 'FacilityList',
     data() {
         return {
         perPage: 10,
         currentPage: 1,
         totalPage: '',
-        searchText: '',
-        selected: null,
+        paginatedItems: this.items
         };
     },computed:{
         ...mapGetters('facility',{
             items :'getItemList',
             dong : 'getdong'
         })
+        , getTotPage(){
+            return this.items.length;
+        }
     },
     watch:{
-        items: function(){
-            this.totalPage = this.items.length;
+        items:function(){
+            this.onPageChanged(1);
+            this.currentPage =1;
         }
     },
     methods: {
-        pageClick(button, page){
-            this.currentPage = page;
-        }
+        paginate(page_size, page_number) {
+            let itemsToParse = this.items;
+            this.paginatedItems = itemsToParse.slice(
+                page_number * page_size,
+                (page_number + 1) * page_size
+            )
+        },
+        onPageChanged(page) {
+            this.paginate(this.perPage, page - 1);
+        },
+    },
+    mounted() {
+        this.paginate(this.perPage, 0);
     },
 }
 </script>
