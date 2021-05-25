@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="_backgroundImage">
-      <b-container id ="searchBox" class="bv-example-row">
+      <b-container id="searchBox" class="bv-example-row">
         <b-row class="_mainSearch">
           <b-col>
             <search-bar />
@@ -14,14 +14,22 @@
         <b-col>
           <b-row>
             <b-col>
-              <strong>news</strong>
+              <strong>뉴스</strong>
             </b-col>
             <b-col>
               <b-button variant="link">더보기</b-button>
             </b-col>
           </b-row>
           <div>
-            <b-table hover :items="news"></b-table>
+            <b-table
+              hover
+              :items="newsData"
+              :per-page="5"
+              :fields="newsField"
+              @row-clicked="moveNews"
+            >
+              <a href="#"></a>
+            </b-table>
           </div>
         </b-col>
         <b-col>
@@ -77,13 +85,14 @@ export default {
   },
   data() {
     return {
-      news: [
-        { 뉴스기사: '실거주자 세부담 줄이고...', 언론사: '조선비즈' },
-        { 뉴스기사: '국힘표 부동산 대책…', 언론사: '매일경제' },
-        { 뉴스기사: '부동산특위서 엇갈린 종부세...', 언론사: '한겨례' },
-        { 뉴스기사: '부동산원, 도시재생...', 언론사: '칸' },
-        { 뉴스기사: '與 "6월 전 매듭"…부동산...', 언론사: '연합뉴스' },
+      news: {},
+      newsField: [
+        {
+          key: 'title',
+          label: '제목',
+        },
       ],
+      newsData: {},
       boards: {},
       boardfield: [
         {
@@ -117,6 +126,9 @@ export default {
     };
   },
   methods: {
+    moveNews(item, index, event) {
+      window.open(this.newsData[index].originallink);
+    },
     moveBoard(boards) {
       console.log(boards.bid);
       this.$router.push({
@@ -163,17 +175,42 @@ export default {
       .catch(() => {
         console.log('공지글 불러오기 실패.');
       });
+
+    http
+      .get('/news')
+      .then((response) => {
+        console.log(response);
+        if (response.data == '') {
+          alert('글이 없습니다');
+        } else {
+          console.log(response.data.items);
+          this.newsData = response.data.items;
+          for (var i = 0; i < 5; i++) {
+            // this.newsData[i].title = {
+            //   title: this.newsData[i].title.replace(/(<([^>]+)>)/gi, ''),
+            // };
+            this.newsData[i].title = response.data.items[i].title.replace(/(<([^>]+)>)/gi, '');
+            if (this.newsData[i].title.length > 20) {
+              this.newsData[i].title = this.newsData[i].title.substr(0, 20) + '...';
+            }
+            console.log(this.newsData);
+          }
+        }
+      })
+      .catch(() => {
+        console.log('글 불러오기 실패.');
+      });
   },
 };
 </script>
 
 <style scope>
 #_backgroundImage {
-  background: url('../assets/main_background.png') no-repeat; 
+  background: url('../assets/main_background.png') no-repeat;
   background-size: cover;
   height: 500px;
 }
-#searchBox{
+#searchBox {
   width: 60%;
   position: relative;
   top: 40%;
