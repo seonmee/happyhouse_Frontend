@@ -6,19 +6,26 @@ import Login from '@/components/Login.vue';
 import Register from '@/components/Register.vue';
 import UserInfo from '@/components/UserInfo.vue';
 import FindPw from '@/components/FindPw.vue';
+
 import BoardList from '@/components/board/BoardList.vue';
 import BoardDetail from '@/components/board/BoardDetail.vue';
 import BoardWrite from '@/components/board/BoardWrite.vue';
 import BoardModify from '@/components/board/BoardModify.vue';
 import UserManage from '@/components/manage/UserManage.vue';
+
 import NoticeList from '@/components/notice/NoticeList.vue';
 import NoticeDetail from '@/components/notice/NoticeDetail.vue';
 import NoticeWrite from '@/components/notice/NoticeWrite.vue';
 import NoticeModify from '@/components/notice/NoticeModify.vue';
+
 import HomePrice from '@/views/HomePrice.vue';
 import DealList from '@/components/houseDeal/DealList.vue';
 import DealDetail from '@/components/houseDeal/DealDetail.vue';
 import RentDetail from '@/components/houseDeal/RentDetail.vue';
+
+import Facility from '@/views/Facility.vue';
+
+import ChartPage from '@/components/chart/ChartPage.vue';
 
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
@@ -132,6 +139,16 @@ const routes = [
         component: RentDetail,
       },
     ],
+  },
+  {
+    path: '/main/facility',
+    name: 'Facility',
+    component: Facility,
+  },
+  {
+    path: '/main/chartPage',
+    name: 'ChartPage',
+    component: ChartPage,
   },
 ];
 

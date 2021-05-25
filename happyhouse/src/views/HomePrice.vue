@@ -1,5 +1,5 @@
 <template>
-    <div class="bv-example-row">
+  <div class="bv-example-row">
     <b-row class="mt-4">
       <b-col cols="5" align="left">
         <search-bar />
