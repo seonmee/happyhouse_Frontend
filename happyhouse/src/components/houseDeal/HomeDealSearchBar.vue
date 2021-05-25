@@ -139,8 +139,11 @@ export default {
         this.paramList = [2, this.gunguCode, this.dong, 1];
         this.getOfficeRentList(this.paramList);
       }
-
+      if(this.$route.name=='Home')
       this.$router.push('/main/price');
+      else
+      this.$router.this.$router.go() ;
+
     },
     setHouseType: function(event) {
 

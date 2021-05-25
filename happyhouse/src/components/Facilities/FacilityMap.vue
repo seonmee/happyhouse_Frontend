@@ -5,6 +5,18 @@
             <li id="SW8" data-order="0"> 
                 <span class="category_bg background"></span>
                 지하철
+            </li>   
+             <li id="SC4" data-order="1"> 
+                <span class="category_bg school"></span>
+                학교
+            </li>  
+             <li id="PS3" data-order="2"> 
+                <span class="category_bg school"></span>
+                어린이집
+            </li> 
+             <li id="AC5" data-order="2"> 
+                <span class="category_bg school"></span>
+                학원
             </li>       
         </ul>
         </div>
@@ -60,7 +72,7 @@ export default {
             var mapContainer = document.getElementById('map'), 
             mapOption = {
                 center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-                level: 2, // 지도의 확대 레벨
+                level: 4, // 지도의 확대 레벨
             };
             
             this.map = new kakao.maps.Map(mapContainer, mapOption);    // 지도 객체
@@ -84,7 +96,7 @@ export default {
 
                 // 인포윈도우로 장소에 대한 설명을 표시합니다
                 var infowindow = new kakao.maps.InfoWindow({
-                    content: '<div style="width:150px;text-align:center;padding:6px 0;">면목본동</div>'
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;">'+self.dong+'</div>'
                 });
                 infowindow.open(self.map, marker);
 
