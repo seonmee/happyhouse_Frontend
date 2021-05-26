@@ -1,24 +1,14 @@
 <template>
   <div class="_notice">
     <h1>공지사항</h1>
-    <!-- <div class="search_box  form-group row">
-      <select class="form-control col-sm-1" v-model="searchType">
-        <option value="title">제목</option>
-        <option value="content">내용</option>
-      </select>
-      <input class="form-control-plaintext col-sm-6" type="text" name="name" v-model="searchName" />
-      <b-button class="_writebtn" @click="writeBoard">검색</b-button>
-    </div> -->
+<!--   
     <div class="search">
       <b-input-group>
         <b-input-group-prepend>
           <b-form-select v-model="selected" class="mb-3">
-            <!-- This slot appears above the options from 'options' prop -->
             <template #first>
               <b-form-select-option :value="null">-- 선택 --</b-form-select-option>
             </template>
-
-            <!-- These options will appear after the ones from 'options' prop -->
             <b-form-select-option value="title">제목</b-form-select-option>
             <b-form-select-option value="content">내용</b-form-select-option>
           </b-form-select>
@@ -28,7 +18,29 @@
           <b-button variant="outline-secondary" @click="searchBoard">검색</b-button>
         </b-input-group-append>
       </b-input-group>
-    </div>
+    </div> -->
+    <b-row class="mr-1 mt-5">
+     <b-col cols="10" align = "left">
+       <b-button variant="outline-secondary" v-show="user" class="mt-2 mb-2 ml-2" @click="writeBoard">글쓰기</b-button>
+     </b-col>
+     <b-col cols="2">
+       <b-input-group>
+       <b-input-group-prepend>
+      <b-form-select v-model="selected">
+          <option value=null >-- 선택 --</option>
+          <option value="title" >제목</option>
+          <option value="content">내용</option>
+      </b-form-select>
+    </b-input-group-prepend>
+
+    <b-form-input type="text" v-model="searchText"></b-form-input>
+
+    <b-input-group-append>
+      <b-button variant="outline-secondary"  @click="searchBoard">검색</b-button>
+    </b-input-group-append>
+    </b-input-group>
+     </b-col>
+   </b-row>
     <b-table
       striped
       hover

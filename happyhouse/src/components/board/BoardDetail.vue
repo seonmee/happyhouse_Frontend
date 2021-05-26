@@ -1,9 +1,15 @@
 <template>
   <b-container>
-    <b-card elevation="10" outlined width="100%" class="mx-auto">
-      <b-card-title> <span>Detail</span><br /><br /> </b-card-title>
+
+    <b-card outlined width="100%">
+      <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"> Q&A게시판 </h5>
+      </div>
+    </b-card>
+
+    <b-card  outlined width="100%"  class="text-left">
       <b-card-text>
-        <b-row>
+       <b-row>
           <b-col :style="{ fontSize: '20px' }"
             >제목: <strong :style="{ fontSize: '30px' }">{{ info.title }}</strong> <br /><br />
           </b-col>
@@ -17,14 +23,14 @@
             ><br /><br />
           </b-col>
         </b-row>
-        Content<br /><br />
+      </b-card-text>
         <b-card>
           <b-aspect :aspect="aspect">
             {{ info.content }}
           </b-aspect>
         </b-card>
-      </b-card-text>
-      <b-button
+      <b-card-text class="text-right mt-2">
+      <b-button 
         type="button"
         variant="primary"
         v-if="info.userid == this.getProfile.userid"
@@ -38,9 +44,10 @@
         @click="deleteBoard"
         >삭제</b-button
       >
-      <b-button type="button" variant="info" @click="moveList">목록</b-button>
+      </b-card-text>
     </b-card>
     <comments :bid="bid"/>
+    <b-button variant="warning" @click="moveList" size="lg"> 목록 </b-button>
   </b-container>
 </template>
 
