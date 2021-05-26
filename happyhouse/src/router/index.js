@@ -26,6 +26,7 @@ import RentDetail from '@/components/houseDeal/RentDetail.vue';
 import Facility from '@/views/Facility.vue';
 
 import ChartPage from '@/components/chart/ChartPage.vue';
+import ApartDealAvg from '@/components/chart/ApartDealAvg.vue';
 
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
@@ -149,6 +150,11 @@ const routes = [
     path: '/main/chartPage',
     name: 'ChartPage',
     component: ChartPage,
+  },
+  {
+    path: '/main/apartAvg',
+    name: 'ApartDealAvg',
+    component: ApartDealAvg,
   },
 ];
 

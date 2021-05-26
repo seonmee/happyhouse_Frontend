@@ -17,6 +17,9 @@
             <b-dropdown-item href="#" @click="moveToDeal">주택거래정보 </b-dropdown-item>
             <b-dropdown-item href="#" @click="moveToFac">동네주변시설 </b-dropdown-item>
             <b-dropdown-item href="#" @click="moveToStore">상권정보 </b-dropdown-item>
+            <b-dropdown-item href="#" @click="moveToAptDealAvg"
+              >구별아파트거래평균
+            </b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
         <!-- Right aligned nav items -->
@@ -108,6 +111,11 @@ export default {
       this.resetCartStateAll();
       this.resetFacilityStateAll();
       this.$router.push('/main/manage/usermanage');
+    },
+    moveToAptDealAvg() {
+      this.resetCartStateAll();
+      this.resetFacilityStateAll();
+      this.$router.push('/main/apartAvg');
     },
   },
 };
