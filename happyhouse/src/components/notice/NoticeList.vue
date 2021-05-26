@@ -19,7 +19,7 @@
         </b-input-group-append>
       </b-input-group>
     </div> -->
-    <b-row class="mr-1 mt-5">
+    <b-row class="mr-1 mt-5 mb-3">
      <b-col cols="10" align = "left">
        <b-button variant="outline-secondary" v-show="user" class="mt-2 mb-2 ml-2" @click="writeBoard">글쓰기</b-button>
      </b-col>
