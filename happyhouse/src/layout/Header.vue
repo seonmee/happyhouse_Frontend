@@ -117,7 +117,7 @@ export default {
       this.resetCartStateAll();
       this.resetFacilityStateAll();
       this.$router.push('/main/amount');
-
+    },
     moveToAptDealAvg() {
       this.resetCartStateAll();
       this.resetFacilityStateAll();
