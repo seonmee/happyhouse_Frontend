@@ -3,7 +3,13 @@
         <template v-if="items && items.length != 0" >
         
         <b-list-group v-if="items && items.length != 0" class="mt-1 padding-top">
-            <b-list-group-item v-for="(item, index) in items" :key="index" @click="showChart">{{item.name}}</b-list-group-item>
+            <b-list-group-item v-for="(item, index) in paginatedItems" :key="index"
+            class="flex-column align-items-start"
+            @mouseover="colorChange(true,index)"
+            @mouseout="colorChange(false,index)"
+            @click="showChart(item.name)"
+            >{{item.name}} 
+            </b-list-group-item>
         </b-list-group>
         <b-pagination class="mt-2"
             v-model="currentPage"
@@ -25,12 +31,13 @@
 </template>
 
 <script>
-
-import { mapGetters } from 'vuex';
+import http from '@/http-common';
+import { mapGetters, mapActions } from 'vuex';
 export default {
 name: 'AmountyList',
     data() {
         return {
+        isColor: [],
         perPage: 10,
         currentPage: 1,
         totalPage: '',
@@ -39,7 +46,6 @@ name: 'AmountyList',
     },computed:{
         ...mapGetters('amount',{
             items :'getItemList',
-            dong : 'getdong',
             year : 'getYear'
         })
         , getTotPage(){
@@ -53,6 +59,9 @@ name: 'AmountyList',
         }
     },
     methods: {
+        ...mapActions('amount'
+            ['setDataSet']
+        ),
         paginate(page_size, page_number) {
             let itemsToParse = this.items;
             this.paginatedItems = itemsToParse.slice(
@@ -63,9 +72,20 @@ name: 'AmountyList',
         onPageChanged(page) {
             this.paginate(this.perPage, page - 1);
         },
-        showChart(){
-            
-        }
+        showChart(name){
+            console.log(name);
+            http
+            .get('/aptDealAmountList/' + this.year +'/' + name)
+            .then(({ data }) => { 
+                this.setDataSet(data);
+            })
+            .catch(() => {
+             alert('에러가 발생했습니다.');
+            });
+        },
+        colorChange(flag,index) {
+        this.isColor[index] = flag;
+        },
     },
     mounted() {
         this.paginate(this.perPage, 0);
@@ -74,5 +94,7 @@ name: 'AmountyList',
 </script>
 
 <style>
-
+.mouse-over-bgcolor {
+    background-color: lightblue;
+}
 </style>

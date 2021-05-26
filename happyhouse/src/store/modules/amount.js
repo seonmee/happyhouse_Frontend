@@ -2,7 +2,7 @@ import http from '@/http-common';
 // initial state
 const state = () => ({
   items: [],
-  dong: '',
+  datas: [],
   year: '',
 });
 
@@ -11,8 +11,8 @@ const getters = {
   getItemList(state) {
     return state.items;
   },
-  getdong(state) {
-    return state.dong;
+  getDatas(state) {
+    return state.datas;
   },
   getYear(state) {
     return state.year;
@@ -32,14 +32,16 @@ const actions = {
     http
       .get('/getaptList/' + dong)
       .then(({ data }) => {
+        console.log(data);
         commit('SET_APT_LIST', data);
       })
       .catch(() => {
         alert('에러가 발생했습니다.');
       });
   },
-  setDong({ commit }, dong) {
-    commit('SET_DONG', dong);
+  setDataSet({ commit }, datas) {
+    console.log(datas);
+    commit('SET_DATA_SET', datas);
   },
   setYear({ commit }, year) {
     commit('SET_YEAR', year);
@@ -59,10 +61,14 @@ const mutations = {
     state.items = items;
   },
   SET_DONG(state, dong) {
+    console.log('set');
     state.dong = dong;
   },
   SET_YEAR(state, year) {
     state.year = year;
+  },
+  SET_DATA_SET(state, datas) {
+    state.datas = datas;
   },
 };
 

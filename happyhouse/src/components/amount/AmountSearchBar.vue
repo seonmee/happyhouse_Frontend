@@ -95,6 +95,7 @@ name: 'AmountSearchBar',
     },
     searchAptList() {
         this.getAptList(this.dong);
+        this.setDong(this.dong);
     },
     sety(){
         this.resetFacilityState();

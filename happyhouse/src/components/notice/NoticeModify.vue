@@ -55,7 +55,7 @@ export default {
       this.content = document.getElementById('textarea-rows').value;
       http
         .put('/notice', {
-          bid: this.nid,
+          nid: this.nid,
           title: this.title,
           content: this.content,
         })
