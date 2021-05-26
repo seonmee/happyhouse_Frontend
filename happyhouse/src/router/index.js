@@ -26,6 +26,7 @@ import RentDetail from '@/components/houseDeal/RentDetail.vue';
 import Facility from '@/views/Facility.vue';
 
 import ChartPage from '@/components/chart/ChartPage.vue';
+import ApartDealAvg from '@/components/chart/ApartDealAvg.vue';
 
 import Amount from '@/views/Amount.vue';
 
@@ -156,6 +157,10 @@ const routes = [
     path: '/main/amount',
     name: 'Amount',
     component: Amount,
+
+    path: '/main/apartAvg',
+    name: 'ApartDealAvg',
+    component: ApartDealAvg,
   },
 ];
 
