@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    <h1>회원 정보</h1>
+    <!-- <h1>회원 정보</h1> -->
     <b-form @submit.prevent="submitForm">
       <b-card bg-variant="light">
         <b-form-group
-          label-cols-lg="3"
-          label="회원정보"
+          label-cols-lg="4"
+          label="회원정보 수정"
           label-size="lg"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -13,7 +13,7 @@
           <b-form-group
             label="아이디:"
             label-for="nested-userid"
-            label-cols-sm="3"
+            label-cols-sm="2"
             label-align-sm="right"
           >
             <b-form-input id="userid" v-model="this.getProfile.userid" readonly></b-form-input>
@@ -22,7 +22,7 @@
           <b-form-group
             label="이름:"
             label-for="nested-username"
-            label-cols-sm="3"
+            label-cols-sm="2"
             label-align-sm="right"
           >
             <b-form-input id="username" :value="this.getProfile.username" required></b-form-input>
@@ -31,7 +31,7 @@
           <b-form-group
             label="비밀번호:"
             label-for="nested-password"
-            label-cols-sm="3"
+            label-cols-sm="2"
             label-align-sm="right"
           >
             <b-form-input type="password" id="password"></b-form-input>
@@ -40,7 +40,7 @@
           <b-form-group
             label="이메일:"
             label-for="nested-email"
-            label-cols-sm="3"
+            label-cols-sm="2"
             label-align-sm="right"
           >
             <b-form-input id="email" :value="this.getProfile.email" required></b-form-input>
@@ -48,7 +48,7 @@
           <b-form-group
             label="전화번호:"
             label-for="nested-phone"
-            label-cols-sm="3"
+            label-cols-sm="2"
             label-align-sm="right"
           >
             <b-form-input id="phone" :value="this.getProfile.number" required></b-form-input>
@@ -56,7 +56,7 @@
           <b-form-group
             label="주소:"
             label-for="nested-address"
-            label-cols-sm="3"
+            label-cols-sm="2"
             label-align-sm="right"
           >
             <b-form-input id="address" :value="this.getProfile.address" required></b-form-input>
