@@ -45,7 +45,7 @@
                   </div>
                   <button
                     type="submit"
-                    class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm"
+                    class="btn btn-warning btn-block text-uppercase mb-2 rounded-pill shadow-sm"
                   >
                     login
                   </button>
@@ -130,7 +130,7 @@ export default {
   min-height: 100px;
 }
 .bg-image {
-  background-image: url('../assets/main_background.png');
+  background-image: url('../assets/login_banner.png');
   background-size: cover;
   background-position: center center;
 }
