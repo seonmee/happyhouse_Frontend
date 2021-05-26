@@ -80,7 +80,6 @@ export default {
     },
     setDongData() {
       this.resetFacilityState();
-      console.log(this.dong);
       this.setDong(this.dong);
     },
   },

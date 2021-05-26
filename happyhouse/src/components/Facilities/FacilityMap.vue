@@ -14,7 +14,7 @@
           <span class="category_bg school"></span>
           어린이집
         </li>
-        <li id="AC5" data-order="2">
+        <li id="AC5" data-order="3">
           <span class="category_bg school"></span>
           학원
         </li>

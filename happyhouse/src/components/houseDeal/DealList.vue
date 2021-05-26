@@ -8,7 +8,7 @@
     </b-list-group>
     <b-container v-else class="mt-1 padding-top">
       <b-row>
-        <b-col><b-alert show>거래 정보가 없습니다.</b-alert></b-col>
+        <b-col><b-alert show variant="warning">거래 정보가 없습니다.</b-alert></b-col>
       </b-row>
     </b-container>
     <b-pagination
