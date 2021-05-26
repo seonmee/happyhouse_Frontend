@@ -1,41 +1,28 @@
 <template>
-
   <div class="main">
     <!-- <img :src="require(`@/assets/title.png`)" id="_img" /> -->
     <!-- <h1>HappyHouse</h1> -->
     <b-navbar toggleable="lg" type="light" variant="warning">
       <b-navbar-brand href="#" @click="moveToMain" class="_nav"
-        ><b-icon icon="house-fill" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon>
-      HOME </b-navbar-brand
-      >
+        ><b-icon icon="house-fill" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon> HOME
+      </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#" class="_nav" @click="moveToNotice"
-            >공지사항</b-nav-item
-          >
-          <b-nav-item href="#" class="_nav" @click="moveToBoard">
-            게시판</b-nav-item
-          >
+          <b-nav-item href="#" class="_nav" @click="moveToNotice">공지사항</b-nav-item>
+          <b-nav-item href="#" class="_nav" @click="moveToBoard"> 게시판</b-nav-item>
           <b-nav-item-dropdown class="_nav" text="SEARCH" right>
-            <b-dropdown-item href="#" @click="moveToDeal">주택거래정보
-            </b-dropdown-item>
-            <b-dropdown-item href="#" @click="moveToFac">동네주변시설
-            </b-dropdown-item>
-            <b-dropdown-item href="#" @click="moveToStore">상권정보
-            </b-dropdown-item>
+            <b-dropdown-item href="#" @click="moveToDeal">주택거래정보 </b-dropdown-item>
+            <b-dropdown-item href="#" @click="moveToFac">동네주변시설 </b-dropdown-item>
+            <b-dropdown-item href="#" @click="moveToStore">상권정보 </b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-item href="#" v-if="this.getProfile == ''" @click="moveToLogin"
-            >로그인</b-nav-item
-          >
-          <b-nav-item href="#" v-if="this.getProfile == ''" @click="moveToReg"
-            >회원가입</b-nav-item
-          >
+          <b-nav-item href="#" v-if="this.getProfile == ''" @click="moveToLogin">로그인</b-nav-item>
+          <b-nav-item href="#" v-if="this.getProfile == ''" @click="moveToReg">회원가입</b-nav-item>
           <b-nav-item href="#" v-if="this.getProfile != ''"
             ><a href="#" @click.prevent="onClickLogout">로그아웃</a></b-nav-item
           >
@@ -48,7 +35,7 @@
             href="#"
             v-if="this.getProfile != '' && this.getProfile.rolename == 'ROLE_ADMIN'"
             ><router-link to="/main/manage/usermanage">유저관리</router-link></b-nav-item
-            >
+          >
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -64,34 +51,54 @@ export default {
   },
   methods: {
     ...mapActions(['logout']),
+    ...mapActions('deal', ['resetCartStateAll']),
+    ...mapActions('facility', ['resetFacilityStateAll']),
     onClickLogout: function() {
       this.logout();
+      this.resetCartStateAll();
+      this.resetFacilityStateAll();
       this.$router.push('/');
     },
-    moveToMain(){
+    moveToMain() {
+      this.resetCartStateAll();
+      this.resetFacilityStateAll();
       this.$router.push('/main/');
     },
-    moveToNotice(){
+    moveToNotice() {
+      this.resetCartStateAll();
+      this.resetFacilityStateAll();
       this.$router.push('/main/notice/noticeList');
     },
-    moveToBoard(){
+    moveToBoard() {
+      this.resetCartStateAll();
+      this.resetFacilityStateAll();
       this.$router.push('/main/board/boardList');
     },
-    moveToDeal(){
+    moveToDeal() {
+      this.resetCartStateAll();
+      this.resetFacilityStateAll();
       this.$router.push('/main/price');
     },
-    moveToLogin(){
+    moveToLogin() {
+      this.resetCartStateAll();
+      this.resetFacilityStateAll();
       this.$router.push('/main/login');
     },
-    moveToReg(){
+    moveToReg() {
+      this.resetCartStateAll();
+      this.resetFacilityStateAll();
       this.$router.push('/main/register');
     },
-    moveToFac(){
+    moveToFac() {
+      this.resetCartStateAll();
+      this.resetFacilityStateAll();
       this.$router.push('/main/facility');
     },
-    moveToStore(){
+    moveToStore() {
+      this.resetCartStateAll();
+      this.resetFacilityStateAll();
       this.$router.push('/main/chartPage');
-    }
+    },
   },
 };
 </script>

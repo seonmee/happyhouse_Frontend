@@ -1,7 +1,7 @@
 import http from '@/http-common';
 // initial state
 // shape: [{ id, quantity }]
-const state = () => ({
+const getDefaultState = () => ({
   type: '',
   pay: '',
   sidoCode: '',
@@ -12,6 +12,8 @@ const state = () => ({
   rents: [],
   rent: {},
 });
+
+const state = getDefaultState();
 
 // getters
 const getters = {
@@ -53,6 +55,12 @@ const getters = {
 
 // actions
 const actions = {
+  resetCartState({ commit }) {
+    commit('resetState');
+  },
+  resetCartStateAll({ commit }) {
+    commit('resetStateAll');
+  },
   selectDeal({ commit }, deal) {
     commit('SELECT_DEAL', deal);
   },
@@ -171,6 +179,17 @@ const actions = {
 
 // mutations
 const mutations = {
+  resetState(state) {
+    Object.assign(state, getDefaultState());
+  },
+  resetStateAll(state) {
+    Object.assign(state, getDefaultState());
+    state.type = '';
+    state.pay = '';
+    state.sidoCode = '';
+    state.gunguCode = '';
+    state.dong = '';
+  },
   SELECT_DEAL(state, deal) {
     state.deal = deal;
   },

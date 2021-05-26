@@ -17,6 +17,12 @@ const getters = {
 
 // actions
 const actions = {
+  resetFacilityState({ commit }) {
+    commit('resetFState');
+  },
+  resetFacilityStateAll({ commit }) {
+    commit('resetFStateAll');
+  },
   setItemList({ commit }, items) {
     commit('SET_ITEM_LIST', items);
   },
@@ -27,6 +33,13 @@ const actions = {
 
 // mutations
 const mutations = {
+  resetFState(state) {
+    state.items = [];
+  },
+  resetFStateAll(state) {
+    state.items = [];
+    state.dong = '';
+  },
   SET_ITEM_LIST(state, items) {
     state.items = items;
   },
