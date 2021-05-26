@@ -49,7 +49,6 @@ export default {
   },
   methods: {
     ...mapActions('deal', [
-      'resetCartState',
       'setType',
       'setPay',
       'setSidoCode',
@@ -68,7 +67,6 @@ export default {
       this.sendKeyword();
     },
     sendKeyword() {
-      this.resetCartState();
       /* 아파트 */
       if (this.sidoCode && this.type == 'apart' && this.pay == 'deal') {
         // 매매
