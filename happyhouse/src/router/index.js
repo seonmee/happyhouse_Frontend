@@ -157,7 +157,8 @@ const routes = [
     path: '/main/amount',
     name: 'Amount',
     component: Amount,
-
+  },
+  {
     path: '/main/apartAvg',
     name: 'ApartDealAvg',
     component: ApartDealAvg,
