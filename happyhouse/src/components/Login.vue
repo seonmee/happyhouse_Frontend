@@ -1,123 +1,85 @@
 <template>
-  <div id="main_wrap">
-    <div id="middle_wrap">
-      <div id="content_wrap">
-        <div
-          style="
-            width: 502px;
-            height: 166px;
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-            top: 100px;
-          "
-        >
-          <div class="login_title_warp">
-            <div style="margin-top: 12px;">
-              <h2>HAPPY HOUSE 로그인</h2>
+  <div class="container">
+    <div class="row no-gutter">
+      <!-- The image half -->
+      <div class="col-md-6 d-none d-md-flex bg-image"></div>
+      <!-- The content half -->
+      <div class="col-md-6 bg-light">
+        <div class="login d-flex align-items-center py-5">
+          <!-- Demo content-->
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-10 col-xl-7 mx-auto">
+                <h3 class="display-4">로그인</h3>
+                <p class="text-muted mb-4"></p>
+                <form class="login" @submit.prevent="login(userid, password)">
+                  <div class="form-group mb-3">
+                    <input
+                      type="text"
+                      id="_userid"
+                      name="id"
+                      value
+                      data-msg="ID를"
+                      size="30"
+                      title="아이디"
+                      required
+                      v-model="userid"
+                      placeholder="아이디"
+                      autofocus=""
+                      class="form-control rounded-pill border-0 shadow-sm px-4"
+                    />
+                  </div>
+                  <div class="form-group mb-3">
+                    <input
+                      type="password"
+                      id="_pwd"
+                      name="pwd"
+                      value
+                      required
+                      v-model="password"
+                      placeholder="패스워드"
+                      size="30"
+                      title="패스워드"
+                      class="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm"
+                  >
+                    login
+                  </button>
+                  <div class="text-center d-flex justify-content-between mt-4">
+                    <p>
+                      가입:
+                      <b-button variant="link" class="font-italic text-muted" @click="moveToReg"
+                        ><u>singup</u></b-button
+                      >
+                    </p>
+                    <p>
+                      찾기:
+                      <b-button variant="link" class="font-italic text-muted" @click="moveToFind"
+                        ><u>findpw</u></b-button
+                      >
+                    </p>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-          <div id="login_wrap">
-            <form class="login" @submit.prevent="login(userid, password)">
-              <table class="content_table" style="width: 75%;">
-                <colgroup>
-                  <col style="width: 30%;" />
-                  <col style="width: 70%;" />
-                </colgroup>
-                <tbody>
-                  <tr>
-                    <th style="background-color: #eeeeee; color: #3e5fba;">
-                      아이디
-                    </th>
-                    <td>
-                      &nbsp;
-                      <input
-                        type="text"
-                        id="_userid"
-                        name="id"
-                        value
-                        data-msg="ID를"
-                        size="30"
-                        title="아이디"
-                        required
-                        v-model="userid"
-                        placeholder="아이디를 입력하세요."
-                        style="border: 1px solid #dddddd;"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th style="background-color: #eeeeee; color: #3e5fba;">
-                      패스워드
-                    </th>
-                    <td>
-                      &nbsp;
-                      <input
-                        type="password"
-                        id="_pwd"
-                        name="pwd"
-                        value
-                        required
-                        v-model="password"
-                        placeholder="패스워드를 입력하세요."
-                        size="30"
-                        title="패스워드"
-                        style="border: 1px solid #dddddd;"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="2" style="height: 50px; text-align: center;">
-                      <b-button type="submit" variant="primary">로그인</b-button>
-                      &nbsp;&nbsp;
-                      <b-button variant="outline-info" @click="findPwd">비밀번호 찾기</b-button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </form>
-          </div>
+          <!-- End -->
         </div>
       </div>
+      <!-- End -->
     </div>
   </div>
 </template>
-<style scope>
-#login_wrap {
-  margin: auto;
-}
-#login_wrap th {
-  font-weight: bold;
-}
-#main_wrap {
-  margin-top: 52px;
-  width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0px;
-  min-height: 610px;
-}
-
-.login_title_warp {
-  margin: auto;
-  width: 500px;
-  color: #ffffff;
-  text-align: center;
-  background-color: #3e5fba;
-  border: solid 1px #efefef;
-  font-weight: bold;
-  height: 60px;
-}
-</style>
 
 <script>
-// import { AUTH_REQUEST } from '../store/actions/auth'
-// import http2 from '../http-common2'
-// import http3 from '../http-common3'
 import http from '@/http-common';
 import { mapActions } from 'vuex';
 export default {
-  name: 'login',
+  name: 'Login',
   data() {
     return {
       userid: '',
@@ -129,15 +91,6 @@ export default {
   methods: {
     ...mapActions(['getLogin']),
     login: function(userid, password) {
-      //model에 바인딩된 데이터 모두 ==> this
-      // const { usernameOrEmail, password } = this
-      // this.$store
-      //   .dispatch(AUTH_REQUEST, { usernameOrEmail, password })
-      //   .then(() => {
-      //     this.$router.push('/')
-      //   })
-      // if (this.userid != null && this.password != null) this.getLogin({ userid, password });
-      // else alert('입력바람');
       if (this.userid != null && this.password != null) {
         http
           .post('/user/login', {
@@ -147,7 +100,9 @@ export default {
           .then((response) => {
             console.log(response.data);
             if (response.data == '') {
-              alert('로그인 실패.');
+              alert('아이디/패스워드를 확인해주세요.');
+              this.userid = '';
+              this.password = '';
             } else {
               this.profile = response.data;
               this.getLogin(this.profile);
@@ -159,9 +114,24 @@ export default {
           });
       } else alert('입력바람');
     },
-    findPwd() {
+    moveToReg() {
+      this.$router.push('/main/register');
+    },
+    moveToFind() {
       this.$router.push('/main/findPw');
     },
   },
 };
 </script>
+
+<style scope>
+.login,
+.image {
+  min-height: 100px;
+}
+.bg-image {
+  background-image: url('../assets/main_background.png');
+  background-size: cover;
+  background-position: center center;
+}
+</style>

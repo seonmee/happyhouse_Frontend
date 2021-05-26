@@ -120,6 +120,16 @@ export default {
     ]),
     ...mapGetters('deal', ['getType', 'getPay', 'getSidoCode', 'getGunguCode', 'getDong']),
     sendKeyword() {
+      if (this.sidoCode == '' || this.gunguCode == '' || this.dong == '') {
+        alert('도/군/동을 입력해주세요');
+        return;
+      }
+      if (this.type == '') {
+        this.type = 'apart';
+      }
+      if (this.pay == '') {
+        this.pay = 'deal';
+      }
       /* 아파트 */
       if (this.sidoCode && this.type == 'apart' && this.pay == 'deal') {
         // 매매

@@ -22,19 +22,19 @@
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
           <b-nav-item href="#" v-if="this.getProfile == ''" @click="moveToLogin">로그인</b-nav-item>
+          <b-nav-item href="#" v-else @click="onClickLogout">로그아웃</b-nav-item>
           <b-nav-item href="#" v-if="this.getProfile == ''" @click="moveToReg">회원가입</b-nav-item>
-          <b-nav-item href="#" v-if="this.getProfile != ''"
-            ><a href="#" @click.prevent="onClickLogout">로그아웃</a></b-nav-item
-          >
           <b-nav-item
             href="#"
             v-if="this.getProfile != '' && this.getProfile.rolename == 'ROLE_USER'"
-            ><router-link to="/main/userinfo">내정보</router-link></b-nav-item
+            @click="moveToInfo"
+            >내정보</b-nav-item
           >
           <b-nav-item
             href="#"
             v-if="this.getProfile != '' && this.getProfile.rolename == 'ROLE_ADMIN'"
-            ><router-link to="/main/manage/usermanage">유저관리</router-link></b-nav-item
+            @click="moveToManage"
+            >유저관리</b-nav-item
           >
         </b-navbar-nav>
       </b-collapse>
@@ -62,7 +62,7 @@ export default {
     moveToMain() {
       this.resetCartStateAll();
       this.resetFacilityStateAll();
-      this.$router.push('/main/');
+      this.$router.push('/');
     },
     moveToNotice() {
       this.resetCartStateAll();
@@ -98,6 +98,16 @@ export default {
       this.resetCartStateAll();
       this.resetFacilityStateAll();
       this.$router.push('/main/chartPage');
+    },
+    moveToInfo() {
+      this.resetCartStateAll();
+      this.resetFacilityStateAll();
+      this.$router.push('/main/userinfo');
+    },
+    moveToManage() {
+      this.resetCartStateAll();
+      this.resetFacilityStateAll();
+      this.$router.push('/main/manage/usermanage');
     },
   },
 };
