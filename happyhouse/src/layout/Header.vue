@@ -15,6 +15,7 @@
           <b-nav-item href="#" class="_nav" @click="moveToBoard"> 게시판</b-nav-item>
           <b-nav-item-dropdown class="_nav" text="SEARCH" right>
             <b-dropdown-item href="#" @click="moveToDeal">주택거래정보 </b-dropdown-item>
+            <b-dropdown-item href="#" @click="moveToAmount">주택가격추이 </b-dropdown-item>
             <b-dropdown-item href="#" @click="moveToFac">동네주변시설 </b-dropdown-item>
             <b-dropdown-item href="#" @click="moveToStore">상권정보 </b-dropdown-item>
           </b-nav-item-dropdown>
@@ -108,6 +109,11 @@ export default {
       this.resetCartStateAll();
       this.resetFacilityStateAll();
       this.$router.push('/main/manage/usermanage');
+    },
+    moveToAmount() {
+      this.resetCartStateAll();
+      this.resetFacilityStateAll();
+      this.$router.push('/main/amount');
     },
   },
 };

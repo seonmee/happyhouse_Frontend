@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 
 import deal from './modules/deal.js';
+import amount from './modules/amount.js';
 import facility from './modules/facility.js';
 
 Vue.use(Vuex);
@@ -35,6 +36,7 @@ export default new Vuex.Store({
   modules: {
     deal,
     facility,
+    amount,
   },
   plugins: [createPersistedState()],
 });

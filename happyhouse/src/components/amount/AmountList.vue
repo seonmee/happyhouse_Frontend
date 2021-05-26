@@ -1,14 +1,9 @@
 <template>
     <div class="ml-3 mt-3">
         <template v-if="items && items.length != 0" >
-        <b-card :title="items[0].category_group_name">
-            <b-card-text>
-                {{dong}}에 위치한 {{items[0].category_group_name}}은 {{items.length}}개 입니다.
-            </b-card-text>
-        </b-card>
         
         <b-list-group v-if="items && items.length != 0" class="mt-1 padding-top">
-            <facility-list-item v-for="(item, index) in this.paginatedItems" :key="index" :item="item"/>
+            <b-list-group-item v-for="(item, index) in items" :key="index" @click="showChart">{{item.name}}</b-list-group-item>
         </b-list-group>
         <b-pagination class="mt-2"
             v-model="currentPage"
@@ -23,19 +18,17 @@
                 <b-col><b-alert show variant="warning">one. 동네를 선택해주세요!</b-alert></b-col>
             </b-row>
             <b-row>
-                <b-col><b-alert show variant="warning">two. 편의시설을 선택해주세요!</b-alert></b-col>
+                <b-col><b-alert show variant="warning">two. 년도를 선책해주세요!</b-alert></b-col>
             </b-row>
         </template>
     </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import FacilityListItem from '@/components/Facilities/FacilityListItem.vue';
 
+import { mapGetters } from 'vuex';
 export default {
-components: { FacilityListItem },
-    name: 'FacilityList',
+name: 'AmountyList',
     data() {
         return {
         perPage: 10,
@@ -44,9 +37,10 @@ components: { FacilityListItem },
         paginatedItems: this.items
         };
     },computed:{
-        ...mapGetters('facility',{
+        ...mapGetters('amount',{
             items :'getItemList',
-            dong : 'getdong'
+            dong : 'getdong',
+            year : 'getYear'
         })
         , getTotPage(){
             return this.items.length;
@@ -69,6 +63,9 @@ components: { FacilityListItem },
         onPageChanged(page) {
             this.paginate(this.perPage, page - 1);
         },
+        showChart(){
+            
+        }
     },
     mounted() {
         this.paginate(this.perPage, 0);

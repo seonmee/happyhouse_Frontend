@@ -27,6 +27,8 @@ import Facility from '@/views/Facility.vue';
 
 import ChartPage from '@/components/chart/ChartPage.vue';
 
+import Amount from '@/views/Amount.vue';
+
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(() => {
@@ -149,6 +151,11 @@ const routes = [
     path: '/main/chartPage',
     name: 'ChartPage',
     component: ChartPage,
+  },
+  {
+    path: '/main/amount',
+    name: 'Amount',
+    component: Amount,
   },
 ];
 
